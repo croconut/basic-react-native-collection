@@ -11,6 +11,7 @@ Wow so easy to make things look like shit
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState('');
+  const [courseGoals, setCourseGoals] = useState([]);
 
   // identical function methods
   // function goalInputHandler(text) {
@@ -22,7 +23,10 @@ export default function App() {
   }
 
   const addGoalHandler = () => {
-    console.log(enteredGoal);
+    if (courseGoals.includes(enteredGoal)) {
+      return;
+    }
+    setCourseGoals(() => [...courseGoals, enteredGoal]);
   }
 
   return (
@@ -40,6 +44,9 @@ export default function App() {
         <Button title="ADD" 
           onPress={addGoalHandler}
         />
+      </View>
+      <View style={styles.goalsList}>
+        { courseGoals.map((goal) => <Text key={goal}>{goal}</Text>)}
       </View>
     </View>
   );
@@ -59,6 +66,10 @@ const styles = StyleSheet.create({
     width: "80%", 
     borderColor: 'black', 
     borderWidth: 2, 
+    paddingHorizontal: 10
+  },
+  goalsList: {
+    paddingTop: 20,
     paddingHorizontal: 10
   }
 });
