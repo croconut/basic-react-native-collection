@@ -12,6 +12,7 @@ Wow so easy to make things look like shit
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState('');
   const [courseGoals, setCourseGoals] = useState([]);
+  const [courseGoalKeys, setCourseGoalKeys] = useState({});
 
   // identical function methods
   // function goalInputHandler(text) {
@@ -23,10 +24,14 @@ export default function App() {
   }
 
   const addGoalHandler = () => {
-    if (courseGoals.includes(enteredGoal)) {
+
+    //using dictionary to guarantee goal uniqueness now
+    if (enteredGoal in courseGoalKeys) {
       return;
     }
     setCourseGoals(() => [...courseGoals, enteredGoal]);
+    //this will break on tiny syntax changes, kinda finicky
+    setCourseGoalKeys(() => ( { ...courseGoalKeys, [enteredGoal]: ''} ));
   }
 
   return (
