@@ -19,15 +19,11 @@ export default function App() {
         flexDirection: 'row', 
         justifyContent: 'space-between',
         alignItems: 'stretch', height: 300}}>
-        <View style={{justifyContent: 'center', flex: 5}}><Text>112532</Text></View>
-        <View style={{flex: 80, justifyContent: 'center', alignContent: 'stretch'}}>
-          <TextInput placeholder="Course goal" 
-            style={{ width: "50%", borderColor: 'black', 
-            borderWidth: 2, paddingHorizontal: 10}}/>
-        </View>
-        <View style={{flex: 20, justifyContent: 'center', alignContent: 'stretch'}}>
-          <Button title="ADD" />
-        </View>
+        <View style={{justifyContent: 'center'}}><Text>112532</Text></View>
+        <TextInput placeholder="Course goal" 
+          style={{ width: "50%", borderColor: 'black', 
+          borderWidth: 2, paddingHorizontal: 10}}/>
+        <Button title="ADD" />
       </View>
   );
 }
