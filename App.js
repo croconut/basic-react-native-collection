@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 /*
 Must use property names, no CSS stuff here ofc
@@ -23,7 +24,6 @@ list items will be rendered, regardless of whether its visible to viewer
 
 export default function App() {
   // examples for each of a string, array and dictionary
-  const [enteredGoal, setEnteredGoal] = useState("");
   const [courseGoals, setCourseGoals] = useState([]);
   const [courseGoalKeys, setCourseGoalKeys] = useState({});
 
@@ -32,12 +32,9 @@ export default function App() {
   //   setEnteredGoal(text);
   // }
 
-  const goalInputHandler = (text) => {
-    //super simple set, we don't care about previous strings
-    setEnteredGoal(text);
-  };
+  
 
-  const addGoalHandler = () => {
+  const addGoalHandler = (enteredGoal) => {
     //using dictionary to guarantee goal uniqueness now
     if (enteredGoal in courseGoalKeys) {
       return;
@@ -56,15 +53,8 @@ export default function App() {
     //can move the scrollview to the top level view to stop the top row from
     //being frozen
     <View style={styles.app}>
-      <View style={styles.inputRow}>
-        <TextInput
-          placeholder="Course goal"
-          style={styles.textInput}
-          onChangeText={goalInputHandler}
-          value={enteredGoal}
-        />
-        <Button title="ADD" onPress={addGoalHandler} />
-      </View>
+      <GoalInput onAdd={addGoalHandler} />
+
       <FlatList
         data={courseGoals}
         renderItem={data => <GoalItem title={data.item.key} />}
@@ -80,28 +70,9 @@ const styles = StyleSheet.create({
   app: {
     paddingVertical: 30,
   },
-  inputRow: {
-    flexDirection: "row",
-    paddingHorizontal: 10,
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  textInput: {
-    width: "80%",
-    borderColor: "black",
-    borderWidth: 2,
-    paddingHorizontal: 10,
-  },
+
   goalsList: {
     paddingTop: 10,
     paddingHorizontal: 5,
-  },
-  goalsListItem: {
-    paddingVertical: 5,
-    paddingHorizontal: 5,
-    marginVertical: 3,
-    backgroundColor: "#ccc",
-    borderColor: "black",
-    borderWidth: 1,
   },
 });
