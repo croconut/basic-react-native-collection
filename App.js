@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Text,
-  StyleSheet,
-  TextInput,
-  View,
-  Button,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Button, FlatList, Modal } from "react-native";
 
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
@@ -26,11 +19,22 @@ export default function App() {
   // examples for each of a string, array and dictionary
   const [courseGoals, setCourseGoals] = useState([]);
   const [courseGoalKeys, setCourseGoalKeys] = useState({});
+  const [isAddMode, setIsAddMode] = useState(false);
 
   // identical function methods
   // function goalInputHandler(text) {
   //   setEnteredGoal(text);
   // }
+
+  const removeGoalHandler = (goalKey) => {
+    setCourseGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.key != goalKey);
+    });
+    // deletes are fucking slow with this method
+    setCourseGoalKeys((currentGoalKeys) => {
+      return Object.keys(currentGoalKeys).filter((goal) => goal.key != goalKey);
+    });
+  };
 
   const addGoalHandler = (enteredGoal) => {
     //using dictionary to guarantee goal uniqueness now
@@ -43,6 +47,10 @@ export default function App() {
     setCourseGoalKeys(() => ({ ...courseGoalKeys, [enteredGoal]: "" }));
   };
 
+  const dynamicFlexStyle = {
+    flex: courseGoals.length,
+  };
+
   return (
     //Note the width gets ignored cuz the flexbox only gets to control the
     //height as they're rows
@@ -51,16 +59,24 @@ export default function App() {
     //can move the scrollview to the top level view to stop the top row from
     //being frozen
     <View style={styles.app}>
-      <GoalInput onAdd={addGoalHandler} />
-      <FlatList
-        data={courseGoals}
-        renderItem={(data) => 
-        <GoalItem onDelete={() => console.log("delete attempted")}
-          title={data.item.key} />}
-        keyExtractor={(data) => data.key}
-        extraData={courseGoals}
-        style={styles.goalsList}
-      />
+      {!isAddMode && (
+        <Button title="ADD GOAL" onPress={() => setIsAddMode(true)} />
+      )}
+      {isAddMode && <GoalInput onAdd={addGoalHandler} />}
+      <View style={[styles.goalsList, dynamicFlexStyle]}>
+        <FlatList
+          data={courseGoals}
+          renderItem={(data) => (
+            <GoalItem
+              onDelete={removeGoalHandler}
+              id={data.item.key}
+              title={data.item.key}
+            />
+          )}
+          keyExtractor={(data) => data.key}
+          extraData={courseGoals}
+        />
+      </View>
     </View>
   );
 }
@@ -69,7 +85,6 @@ const styles = StyleSheet.create({
   app: {
     paddingVertical: 30,
   },
-
   goalsList: {
     paddingTop: 10,
     paddingHorizontal: 5,
