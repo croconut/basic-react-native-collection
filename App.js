@@ -8,6 +8,8 @@ import {
   FlatList,
 } from "react-native";
 
+import GoalItem from "./components/GoalItem";
+
 /*
 Must use property names, no CSS stuff here ofc
 View by default uses flexbox. Organizes child elements in 1d space.
@@ -46,12 +48,6 @@ export default function App() {
     setCourseGoalKeys(() => ({ ...courseGoalKeys, [enteredGoal]: "" }));
   };
 
-  const goalItem = ({ item }) => (
-    <View style={styles.goalsListItem}>
-      <Text>{item.key}</Text>
-    </View>
-  );
-
   return (
     //Note the width gets ignored cuz the flexbox only gets to control the
     //height as they're rows
@@ -71,8 +67,8 @@ export default function App() {
       </View>
       <FlatList
         data={courseGoals}
-        renderItem={goalItem}
-        keyExtractor={(item) => item.key}
+        renderItem={data => <GoalItem title={data.item.key} />}
+        keyExtractor={(data) => data.key}
         extraData={courseGoals}
         style={styles.goalsList}
       />
