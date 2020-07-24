@@ -32,8 +32,6 @@ export default function App() {
   //   setEnteredGoal(text);
   // }
 
-  
-
   const addGoalHandler = (enteredGoal) => {
     //using dictionary to guarantee goal uniqueness now
     if (enteredGoal in courseGoalKeys) {
@@ -54,10 +52,11 @@ export default function App() {
     //being frozen
     <View style={styles.app}>
       <GoalInput onAdd={addGoalHandler} />
-
       <FlatList
         data={courseGoals}
-        renderItem={data => <GoalItem title={data.item.key} />}
+        renderItem={(data) => 
+        <GoalItem onDelete={() => console.log("delete attempted")}
+          title={data.item.key} />}
         keyExtractor={(data) => data.key}
         extraData={courseGoals}
         style={styles.goalsList}
