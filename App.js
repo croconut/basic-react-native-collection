@@ -70,19 +70,18 @@ export default function App() {
         <Button title="ADD NEW GOAL" onPress={() => setIsAddMode(true)} />
       </View>
       {isAddMode && <GoalInput onAdd={addGoalHandler} cancelAdd={cancelAdd} />}
-      <View style={styles.goalsList}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(data) => (
-            <GoalItem
-              onDelete={removeGoalHandler}
-              id={data.item.key}
-              title={data.item.key}
-            />
-          )}
-          keyExtractor={(data) => data.key}
-        />
-      </View>
+      <FlatList
+        data={courseGoals}
+        renderItem={(data) => (
+          <GoalItem
+            onDelete={removeGoalHandler}
+            id={data.item.key}
+            title={data.item.key}
+          />
+        )}
+        keyExtractor={(data) => data.key}
+        style={styles.goalsList}
+      />
     </View>
   );
 }
@@ -93,12 +92,9 @@ const styles = StyleSheet.create({
   },
   addButton: {
     paddingTop: 15,
-    paddingHorizontal: "7.5%",
+    paddingHorizontal: "10%",
     alignItems: "stretch",
     justifyContent: "center",
-  },
-  buttonStyle: {
-    width: "80%",
   },
   goalsList: {
     paddingTop: 10,

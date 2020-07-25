@@ -29,7 +29,7 @@ const GoalInput = (props) => {
           value={enteredGoal}
         />
         <View style={styles.buttons}>
-          <Button title="CANCEL" color="red" onPress={cancelAddHandler}/>
+          <Button title="CANCEL" color="red" onPress={cancelAddHandler} />
         </View>
         <View style={styles.buttons}>
           <Button title="ADD" onPress={addGoalHandler} />
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   buttons: {
-    paddingHorizontal: "15%",
+    paddingHorizontal: "20%",
     paddingTop: 10,
   },
 });
