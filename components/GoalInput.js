@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TextInput, Button, Modal } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Modal,
+  Alert,
+} from "react-native";
 
 const GoalInput = (props) => {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -10,6 +17,9 @@ const GoalInput = (props) => {
   };
 
   const addGoalHandler = () => {
+    if (enteredGoal === "") {
+      return Alert.alert("Goal cannot be blank");
+    }
     props.onAdd(enteredGoal);
     setEnteredGoal("");
   };
