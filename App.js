@@ -38,14 +38,19 @@ export default function App() {
 
   const addGoalHandler = (enteredGoal) => {
     //using dictionary to guarantee goal uniqueness now
-    setIsAddMode(false);
     if (enteredGoal in courseGoalKeys) {
+      setIsAddMode(false);
       return;
     }
     //maintain the previous states of the array/dicts with ...arr, newitem
     setCourseGoals(() => [...courseGoals, { key: enteredGoal }]);
     //this will break on tiny syntax changes, kinda finicky
     setCourseGoalKeys(() => ({ ...courseGoalKeys, [enteredGoal]: "" }));
+    setIsAddMode(false);
+  };
+
+  const cancelAdd = () => {
+    setIsAddMode(false);
   };
 
   // example usage would be <View style={[styles.staticStyles, dynamicFlexStlye]}>
@@ -61,15 +66,10 @@ export default function App() {
     //can move the scrollview to the top level view to stop the top row from
     //being frozen
     <View style={styles.app}>
-      {!isAddMode && (
-        <View style={styles.addButton}>
-          <Button
-            title="ADD NEW GOAL"
-            onPress={() => setIsAddMode(true)}
-          />
-        </View>
-      )}
-      {isAddMode && <GoalInput onAdd={addGoalHandler} />}
+      <View style={styles.addButton}>
+        <Button title="ADD NEW GOAL" onPress={() => setIsAddMode(true)} />
+      </View>
+      {isAddMode && <GoalInput onAdd={addGoalHandler} cancelAdd={cancelAdd} />}
       <View style={styles.goalsList}>
         <FlatList
           data={courseGoals}
@@ -95,10 +95,10 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingHorizontal: "7.5%",
     alignItems: "stretch",
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   buttonStyle: {
-    width: "80%"
+    width: "80%",
   },
   goalsList: {
     paddingTop: 10,

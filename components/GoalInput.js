@@ -14,8 +14,13 @@ const GoalInput = (props) => {
     setEnteredGoal("");
   };
 
+  const cancelAddHandler = () => {
+    props.cancelAdd();
+    setEnteredGoal("");
+  };
+
   return (
-    <Modal>
+    <Modal animationType="fade">
       <View style={styles.inputRow}>
         <TextInput
           placeholder="Course goal"
@@ -24,7 +29,7 @@ const GoalInput = (props) => {
           value={enteredGoal}
         />
         <View style={styles.buttons}>
-          <Button title="CANCEL" color="red" />
+          <Button title="CANCEL" color="red" onPress={cancelAddHandler}/>
         </View>
         <View style={styles.buttons}>
           <Button title="ADD" onPress={addGoalHandler} />
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     paddingHorizontal: "15%",
-    paddingVertical: 30,
+    paddingTop: 10,
   },
 });
 
