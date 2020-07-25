@@ -38,6 +38,7 @@ export default function App() {
 
   const addGoalHandler = (enteredGoal) => {
     //using dictionary to guarantee goal uniqueness now
+    setIsAddMode(false);
     if (enteredGoal in courseGoalKeys) {
       return;
     }
@@ -47,6 +48,7 @@ export default function App() {
     setCourseGoalKeys(() => ({ ...courseGoalKeys, [enteredGoal]: "" }));
   };
 
+  // example usage would be <View style={[styles.staticStyles, dynamicFlexStlye]}>
   const dynamicFlexStyle = {
     flex: courseGoals.length,
   };
@@ -60,10 +62,15 @@ export default function App() {
     //being frozen
     <View style={styles.app}>
       {!isAddMode && (
-        <Button title="ADD GOAL" onPress={() => setIsAddMode(true)} />
+        <View style={styles.addButton}>
+          <Button
+            title="ADD NEW GOAL"
+            onPress={() => setIsAddMode(true)}
+          />
+        </View>
       )}
       {isAddMode && <GoalInput onAdd={addGoalHandler} />}
-      <View style={[styles.goalsList, dynamicFlexStyle]}>
+      <View style={styles.goalsList}>
         <FlatList
           data={courseGoals}
           renderItem={(data) => (
@@ -74,7 +81,6 @@ export default function App() {
             />
           )}
           keyExtractor={(data) => data.key}
-          extraData={courseGoals}
         />
       </View>
     </View>
@@ -84,6 +90,15 @@ export default function App() {
 const styles = StyleSheet.create({
   app: {
     paddingVertical: 30,
+  },
+  addButton: {
+    paddingTop: 15,
+    paddingHorizontal: "7.5%",
+    alignItems: "stretch",
+    justifyContent: 'center',
+  },
+  buttonStyle: {
+    width: "80%"
   },
   goalsList: {
     paddingTop: 10,
