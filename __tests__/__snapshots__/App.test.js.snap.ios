@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "paddingVertical": 30,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+        "justifyContent": "center",
+        "paddingHorizontal": "10%",
+        "paddingTop": 15,
+      }
+    }
+  >
+    <Button
+      onPress={[Function]}
+      title="ADD NEW GOAL"
+    />
+  </View>
+  <FlatList
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    style={
+      Object {
+        "paddingHorizontal": 5,
+        "paddingTop": 10,
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+</View>
+`;
