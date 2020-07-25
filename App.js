@@ -13,6 +13,12 @@ Wow so easy to make things look like shit
 
 Scrollview is bad if theres too many elements as all the scrollview
 list items will be rendered, regardless of whether its visible to viewer
+
+Flatlist is pretty good
+
+should be using jest --> make sure doing jest install for dev only
+also install enzyme --> same dev install and set up the jest.config.js 
+the same way
 */
 
 export default function App() {
