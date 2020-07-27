@@ -38,7 +38,7 @@ const MainMenu = (props) => {
     }
     const chosenN = parseInt(enteredValue);
     //should be guaranteed by the regex tho for second two checks
-    if (chosenN === NaN || chosenN < 1 || chosenN > 99) {
+    if (isNaN(chosenN) || chosenN < 1 || chosenN > 99) {
       return badNumAlert();
     }
     setConfirm(true);
