@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import MainMenu from "./screens/MainMenu";
+import Header from "./components/Header";
 
 export default function App() {
   return (
-    <MainMenu />
+    <View style={styles.screen}>
+      <Header title="Guess a Number" />
+      <MainMenu />
+    </View>
   );
 }
 
