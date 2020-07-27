@@ -1,26 +1,80 @@
-import React from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert
+} from "react-native";
 import FontScalar from "../responsive/FontScalar";
 import Card from "../components/Card";
-import Colors from "../globals/Colors"
+import Colors from "../globals/Colors";
+import Input from "../components/Input";
 
 const MainMenu = (props) => {
+  const [enteredValue, setEnteredValue] = useState("");
+  const [confirm, setConfirm] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(0);
+
+  const numberValidator = (input) => {
+    setEnteredValue(input.replace(/[^0-9]/g, ""));
+  };
+
+  const resetNumber = () => {
+    setEnteredValue("");
+    setConfirm(false);
+  };
+
+  const badNumAlert = () => {
+    Alert.alert('Invalid number!', 'Number must be between 1 and 99',
+    [{text: 'Ok', style: 'destructive', onPress: resetNumber}]);
+  }
+
+  const confirmNumber = () => {
+    if (enteredValue === "") {
+      return badNumAlert();
+    }
+    const chosenN = parseInt(enteredValue);
+    //should be guaranteed by the regex tho for second two checks
+    if (chosenN === NaN || chosenN < 1 || chosenN > 99) {
+      return badNumAlert();
+    }
+    setConfirm(true);
+    setSelectedValue(chosenN);
+    setEnteredValue("");
+  };
+
   return (
-    <View style={styles.screen}>
-      <Text style={styles.title}>Start a New Game!</Text>
-      <Card style={styles.inputContainer}>
-        <Text style={styles.inputText}>Select a Number</Text>
-        <TextInput style={styles.inputText} placeholder="enter here" />
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button title="Confirm" color={Colors.secondary} onPress={() => {}} />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.screen}>
+        <Text style={styles.title}>Start a New Game!</Text>
+        <Card style={styles.inputContainer}>
+          <Text style={styles.inputText}>Select a Number</Text>
+          <Input
+            keyboardType="number-pad"
+            maxLength={2}
+            placeholder="17"
+            onChangeText={numberValidator}
+            value={enteredValue}
+          />
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button
+                title="Confirm"
+                color={Colors.secondary}
+                onPress={() => confirmNumber()}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button title="Reset" color={Colors.primary} onPress={() => resetNumber()} />
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button title="Reset" color={Colors.primary} onPress={() => {}} />
-          </View>
-        </View>
-      </Card>
-    </View>
+        </Card>
+        {confirm && <Text>{selectedValue}</Text>}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -28,10 +82,9 @@ const MainMenu = (props) => {
 // shadow stuff only works on ios
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
     padding: "2%",
+    height: "100%",
     alignItems: "center",
-    justifyContent: "center",
   },
   title: {
     fontSize: FontScalar(20),
