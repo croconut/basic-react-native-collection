@@ -7,7 +7,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
-    "startEmulated": "emulator @Nexus_One_API_27"
+    "emulator": "emulator @Nexus_One_API_27"
   },
   "dependencies": {
     "expo": "~38.0.8",
