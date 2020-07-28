@@ -7,28 +7,29 @@ import Colors from "../globals/Colors";
 
 //needs -> setEnteredValue fn, enteredValue, confirm fn and reset fn
 const Select = (props) => {
+  const { enteredValue, setEnteredValue, confirm, reset } = props;
   return (
     <Card style={Styles.largeContainer}>
       <Input
         keyboardType="number-pad"
         maxLength={2}
         placeholder="17"
-        onChangeText={props.setEnteredValue}
-        value={props.enteredValue}
+        onChangeText={setEnteredValue}
+        value={enteredValue}
       />
       <View style={Styles.rowContainer}>
         <View style={Styles.button}>
           <Button
             title="Confirm"
             color={Colors.secondary}
-            onPress={props.confirm}
+            onPress={confirm}
           />
         </View>
         <View style={Styles.button}>
           <Button
             title="Reset"
             color={Colors.primary}
-            onPress={props.reset}
+            onPress={reset}
           />
         </View>
       </View>

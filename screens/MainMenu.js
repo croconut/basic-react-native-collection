@@ -10,6 +10,7 @@ import Select from "../components/Select";
 import Styles from "../globals/Styles";
 
 const MainMenu = (props) => {
+  const { startGameHandler } = props;
   const [enteredValue, setEnteredValue] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [selectedValue, setSelectedValue] = useState(0);
@@ -24,7 +25,7 @@ const MainMenu = (props) => {
   };
 
   const start = () => {
-    props.startGameHandler(selectedValue);
+    startGameHandler(selectedValue);
   };
 
   const badNumAlert = () => {

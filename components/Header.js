@@ -21,9 +21,10 @@ import Colors from "../globals/Colors";
 
 
 const Header = (props) => {
+  const { title } = props;
   return (
     <View style={styles.header}>
-      <Text style={styles.headerTitle}>{props.title}</Text>
+      <Text style={styles.headerTitle}>{title}</Text>
     </View>
   );
 };

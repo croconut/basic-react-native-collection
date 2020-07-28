@@ -8,25 +8,26 @@ import Colors from "../globals/Colors";
 
 //needs -> val, start fn and reselect fn
 const Start = (props) => {
+  const { value, start, reselect } = props;
   return (
     <Card style={Styles.largeContainer}>
       <View style={Styles.minimalRowContainer}>
         <Text style={Styles.smallText}>You chose </Text>
-        <NumberContainer>{props.value}</NumberContainer>
+        <NumberContainer>{value}</NumberContainer>
       </View>
       <View style={Styles.rowContainer}>
         <View style={Styles.button}>
           <Button
             title="Start"
             color={Colors.secondary}
-            onPress={props.start}
+            onPress={start}
           />
         </View>
         <View style={Styles.button}>
           <Button
             title="Reselect"
             color={Colors.primary}
-            onPress={props.reselect}
+            onPress={reselect}
           />
         </View>
       </View>

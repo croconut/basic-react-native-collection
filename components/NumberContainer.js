@@ -4,9 +4,10 @@ import Colors from '../globals/Colors';
 import FontScalar from "../responsive/FontScalar";
 
 const NumberContainer = (props) => {
+  const { style, children } = props;
   return (
-    <View style={{ ...styles.container, ...props.style }}>
-      <Text style={styles.number}>{props.children}</Text>
+    <View style={{ ...styles.container, ...style }}>
+      <Text style={styles.number}>{children}</Text>
     </View>
   );
 };

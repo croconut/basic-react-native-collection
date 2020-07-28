@@ -3,7 +3,8 @@ import { View, StyleSheet, TextInput } from "react-native";
 
 //input also takes any prop a TextInput would normally support
 const Input = (props) => {
-  return <TextInput {...props} style={{ ...styles.input, ...props.style }} ></TextInput>;
+  const { style } = props;
+  return <TextInput {...props} style={{ ...styles.input, ...style }} ></TextInput>;
 };
 
 const styles = StyleSheet.create({

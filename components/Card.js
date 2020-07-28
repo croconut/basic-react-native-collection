@@ -5,8 +5,9 @@ import { View, StyleSheet } from "react-native";
 // allows props.styles to override any default card styles
 
 const Card = (props) => {
+  const { style, children } = props;
   return (
-    <View style={{ ...styles.card, ...props.style }}>{props.children}</View>
+    <View style={{ ...styles.card, ...style }}>{children}</View>
   );
 };
 

@@ -25,27 +25,33 @@ const badHintAlert = () => {
   ]);
 };
 
-const winAlert = (steps, onPress) => {
-  Alert.alert("I win!", `Only took me ${steps} tries too.`, [
-    {
-      text: "Ok...",
-      style: "destructive",
-      onPress: onPress,
-    },
-  ]);
-};
-
 export default Game = (props) => {
+  // should always extract the props i want and use them as 
+  // internal variables for re-rendering purposes
+  const {userNumber, resetGame} = props;
   // how many guesses comp took
   const [stepCount, setStepCount] = useState(1);
   const [currentGuess, setCurrentGuess] = useState(
-    createRandom(1, 100, props.userNumber)
+    createRandom(1, 100, userNumber)
   );
   const lowestGuess = useRef(1);
   const highestGuess = useRef(100);
 
+  
+
+  // fires only after dependencies change
+  // need to extract props to internal variables to this function
+  // to ensure we're not looking for every single prop change
+  // cuz when we add props.userNumber it re-runs this when props.blah
+  // changes
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      resetGame(stepCount);
+    }
+  }, [currentGuess, userNumber, resetGame]);
+
   const lowerHelp = () => {
-    if (currentGuess < props.userNumber) {
+    if (currentGuess < userNumber) {
       badHintAlert();
       return false;
     }
@@ -54,7 +60,7 @@ export default Game = (props) => {
   };
 
   const higherHelp = () => {
-    if (currentGuess > props.userNumber) {
+    if (currentGuess > userNumber) {
       badHintAlert();
       return false;
     }
@@ -86,8 +92,6 @@ export default Game = (props) => {
 
   return (
     <View style={Styles.gameScreen}>
-      {currentGuess === props.userNumber &&
-        winAlert(stepCount, props.resetGame)}
       <Card style={Styles.largeContainer}>
         <Text>Opponent's Guess</Text>
         <NumberContainer>{currentGuess}</NumberContainer>
