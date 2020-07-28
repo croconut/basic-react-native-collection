@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import {
   View,
-  StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
 } from "react-native";
 import Start from "../components/Start";
 import Select from "../components/Select";
+import Styles from "../globals/Styles";
 
 const MainMenu = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -24,7 +24,7 @@ const MainMenu = (props) => {
   };
 
   const start = () => {
-    return;
+    props.startGameHandler(selectedValue);
   };
 
   const badNumAlert = () => {
@@ -50,7 +50,7 @@ const MainMenu = (props) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.screen}>
+      <View style={Styles.gameScreen}>
         {confirm && (
           <Start value={selectedValue} start={start} reselect={resetNumber} />
         )}
@@ -66,17 +66,5 @@ const MainMenu = (props) => {
     </TouchableWithoutFeedback>
   );
 };
-
-// android only responds to elevation, the other
-// shadow stuff only works on ios
-const styles = StyleSheet.create({
-  screen: {
-    zIndex: 0,
-    paddingHorizontal: "2%",
-    paddingTop: "28%",
-    height: "100%",
-    alignItems: "center",
-  },
-});
 
 export default MainMenu;

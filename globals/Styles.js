@@ -1,7 +1,16 @@
 import { StyleSheet } from "react-native";
 import FontScalar from "../responsive/FontScalar";
 
+// these styles are common between a bunch of components and were pulled out
+// for reusability
 export default Styles = StyleSheet.create({
+  gameScreen: {
+    zIndex: 0,
+    paddingHorizontal: "2%",
+    paddingTop: "28%",
+    height: "100%",
+    alignItems: "center",
+  },
   smallText: {
     fontSize: FontScalar(18),
   },
