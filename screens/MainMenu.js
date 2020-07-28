@@ -6,7 +6,7 @@ import {
   Button,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert
+  Alert,
 } from "react-native";
 import FontScalar from "../responsive/FontScalar";
 import Card from "../components/Card";
@@ -28,9 +28,10 @@ const MainMenu = (props) => {
   };
 
   const badNumAlert = () => {
-    Alert.alert('Invalid number!', 'Number must be between 1 and 99',
-    [{text: 'Ok', style: 'destructive', onPress: resetNumber}]);
-  }
+    Alert.alert("Invalid number!", "Number must be between 1 and 99", [
+      { text: "Ok", style: "destructive", onPress: resetNumber },
+    ]);
+  };
 
   const confirmNumber = () => {
     if (enteredValue === "") {
@@ -44,6 +45,14 @@ const MainMenu = (props) => {
     setConfirm(true);
     setSelectedValue(chosenN);
     setEnteredValue("");
+  };
+
+  const confirmedOutput = () => {
+    return (
+      <Card style={styles.outputContainer}>
+        <Text>{selectedValue}</Text>
+      </Card>
+    );
   };
 
   return (
@@ -68,11 +77,15 @@ const MainMenu = (props) => {
               />
             </View>
             <View style={styles.button}>
-              <Button title="Reset" color={Colors.primary} onPress={() => resetNumber()} />
+              <Button
+                title="Reset"
+                color={Colors.primary}
+                onPress={() => resetNumber()}
+              />
             </View>
           </View>
         </Card>
-        {confirm && <Text>{selectedValue}</Text>}
+        {confirm && confirmedOutput()}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -106,6 +119,9 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "35%",
+  },
+  outputContainer: {
+    marginTop: "3%",
   },
 });
 
