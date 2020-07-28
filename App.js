@@ -12,11 +12,15 @@ export default function App() {
     setUserNumber(selectedNumber);
   };
 
+  const resetGame = () => {
+    setUserNumber();
+  }
+
   return (
     <View style={styles.screen}>
       <Header title="Guess a Number" />
       {!userNumber && <MainMenu startGameHandler={startGameHandler} />}
-      {userNumber && <Game userNumber={userNumber}/>}
+      {userNumber && <Game userNumber={userNumber} resetGame={resetGame}/>}
     </View>
   );
 }
