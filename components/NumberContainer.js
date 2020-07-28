@@ -15,16 +15,14 @@ const styles = StyleSheet.create({
   container: {
       borderWidth: 2,
       borderColor: Colors.tertiary,
-      padding: "2%",
-      borderRadius: 15,
-      marginVertical: "3%",
-      alignContent: 'center',
-      justifyContent: 'center',
+      padding: "1%",
+      borderRadius: 10,
+      marginVertical: "2%",
   },
   number: {
       color: Colors.secondary,
+      paddingHorizontal: "1.5%",
       fontSize: FontScalar(22),
-      alignSelf: 'center',
   }
 });
 

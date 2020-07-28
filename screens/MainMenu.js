@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
-  Button,
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
 } from "react-native";
-import FontScalar from "../responsive/FontScalar";
-import Card from "../components/Card";
-import Colors from "../globals/Colors";
-import Input from "../components/Input";
-import NumberContainer from "../components/NumberContainer";
+import Start from "../components/Start";
+import Select from "../components/Select";
 
 const MainMenu = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -26,6 +21,10 @@ const MainMenu = (props) => {
   const resetNumber = () => {
     setEnteredValue("");
     setConfirm(false);
+  };
+
+  const start = () => {
+    return;
   };
 
   const badNumAlert = () => {
@@ -49,46 +48,20 @@ const MainMenu = (props) => {
     setEnteredValue("");
   };
 
-  const confirmedOutput = () => {
-    return (
-      <Card style={styles.outputContainer}>
-        <Text>You selected</Text>
-        <NumberContainer>{selectedValue}</NumberContainer>
-        <Button title="START" />
-      </Card>
-    );
-  };
-
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.screen}>
-        <Card style={styles.inputContainer}>
-          <Text style={styles.inputText}>Select a Number</Text>
-          <Input
-            keyboardType="number-pad"
-            maxLength={2}
-            placeholder="17"
-            onChangeText={numberValidator}
-            value={enteredValue}
-          />
-          <View style={styles.buttonContainer}>
-            <View style={styles.button}>
-              <Button
-                title="Confirm"
-                color={Colors.secondary}
-                onPress={() => confirmNumber()}
-              />
-            </View>
-            <View style={styles.button}>
-              <Button
-                title="Reset"
-                color={Colors.primary}
-                onPress={() => resetNumber()}
-              />
-            </View>
-          </View>
-        </Card>
-        {confirm && confirmedOutput()}
+        {confirm && (
+          <Start value={selectedValue} start={start} reselect={resetNumber} />
+        )}
+        {!confirm && (
+          <Select
+            enteredValue={enteredValue}
+            setEnteredValue={numberValidator}
+            confirm={confirmNumber}
+            reset={resetNumber}
+          ></Select>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -103,31 +76,6 @@ const styles = StyleSheet.create({
     paddingTop: "28%",
     height: "100%",
     alignItems: "center",
-  },
-  title: {
-    fontSize: FontScalar(20),
-    marginVertical: "2%",
-  },
-  inputText: {
-    fontSize: FontScalar(16),
-  },
-  inputContainer: {
-    width: "90%",
-    alignItems: "center",
-    shadowColor: "black",
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-around",
-    paddingHorizontal: "5%",
-  },
-  button: {
-    width: "35%",
-  },
-  outputContainer: {
-    marginTop: "3%",
-    alignItems: 'center',
   },
 });
 

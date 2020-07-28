@@ -8,13 +8,11 @@ const Input = (props) => {
 
 const styles = StyleSheet.create({
   input: {
-    height: "22%",
     borderColor: "grey",
     borderRightWidth: 3,
     borderBottomWidth: 3,
     marginVertical: "2%",
-    paddingHorizontal: "2%",
-    paddingVertical: "1%",
+    padding: "1%",
   },
 });
 
