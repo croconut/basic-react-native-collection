@@ -12,6 +12,7 @@ import FontScalar from "../responsive/FontScalar";
 import Card from "../components/Card";
 import Colors from "../globals/Colors";
 import Input from "../components/Input";
+import NumberContainer from "../components/NumberContainer";
 
 const MainMenu = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -42,6 +43,7 @@ const MainMenu = (props) => {
     if (isNaN(chosenN) || chosenN < 1 || chosenN > 99) {
       return badNumAlert();
     }
+    Keyboard.dismiss();
     setConfirm(true);
     setSelectedValue(chosenN);
     setEnteredValue("");
@@ -50,7 +52,9 @@ const MainMenu = (props) => {
   const confirmedOutput = () => {
     return (
       <Card style={styles.outputContainer}>
-        <Text>{selectedValue}</Text>
+        <Text>You selected</Text>
+        <NumberContainer>{selectedValue}</NumberContainer>
+        <Button title="START" />
       </Card>
     );
   };
@@ -58,7 +62,6 @@ const MainMenu = (props) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
         <Card style={styles.inputContainer}>
           <Text style={styles.inputText}>Select a Number</Text>
           <Input
@@ -95,7 +98,9 @@ const MainMenu = (props) => {
 // shadow stuff only works on ios
 const styles = StyleSheet.create({
   screen: {
-    padding: "2%",
+    zIndex: 0,
+    paddingHorizontal: "2%",
+    paddingTop: "28%",
     height: "100%",
     alignItems: "center",
   },
@@ -122,6 +127,7 @@ const styles = StyleSheet.create({
   },
   outputContainer: {
     marginTop: "3%",
+    alignItems: 'center',
   },
 });
 

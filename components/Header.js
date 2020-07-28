@@ -30,17 +30,19 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
   header: {
+    position: 'absolute',
+    zIndex: 3,
     width: "100%",
-    height: "25%",
-    paddingTop: "12%",
     alignItems: "center",
     backgroundColor: "white",
   },
   headerTitle: {
+    paddingTop: "12%",
     alignSelf: 'center',
     justifyContent: 'center',
     color: "black",
-    fontSize: FontScalar(22),
+    fontSize: FontScalar(30),
+    fontWeight: 'bold',
   },
 });
 
