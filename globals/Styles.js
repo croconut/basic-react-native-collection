@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants'
-import FontScalar from '../responsive/FontScalar';
-import Colors from './Colors';
+import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
+import FontScalar from "../responsive/FontScalar";
+import Colors from "./Colors";
 
 export default StyleSheet.create({
   screen: {
@@ -9,7 +9,12 @@ export default StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     backgroundColor: Colors.primary.dark[0],
     color: Colors.primary.dark[1],
-    alignItems: 'center',
+    alignItems: "center",
+  },
+  // the unstacked screens are special
+  // this function also can't be called with normal () => style
+  unstackedScreen: function () {
+    return { ...this.screen, ...{ marginTop: 0 } };
   },
   largeText: {
     fontSize: FontScalar(30),
