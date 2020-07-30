@@ -4,11 +4,12 @@ import Styles from "../globals/Styles";
 
 const Home = (props) => {
   const { navigation } = props;
-  const parentStyle = Styles.unstackedScreen;
-  const notificationStyle = Styles.notification;
+  const refreshedS = Styles();
+  const parentStyle = refreshedS.unstackedScreen;
+  const notificationStyle = refreshedS.notification;
   return (
     <View style={parentStyle}>
-      <Text style={{ ...Styles.largeText, ...{ color: parentStyle.color } }}>
+      <Text style={{ ...refreshedS.largeText, ...{ color: parentStyle.color } }}>
         Welcome
       </Text>
       <View style={{ paddingTop: "15%" }}>
