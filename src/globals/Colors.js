@@ -24,3 +24,29 @@ export default {
     gray900: ["#263238", "#FFFFFF"],
   },
 };
+
+export const Dark = {
+  dark: true,
+  colors: {
+    primary: "#efe7ff",
+    background: "#1a237e",
+    card: "#7c4dff",
+    text: "#FFFFFF",
+    border: "#ede7f6",
+    notification: "#5c6bc0",
+    textSecondary: "#EBEBEB",
+  },
+};
+
+export const Light = {
+  dark: false,
+  colors: {
+    primary: "#ffffff",
+    background: "#FFFFFF",
+    card: "#7C4DFF",
+    text: "#FFFFFF",
+    border: "#455A64",
+    notification: "#FF4DD0",
+    textSecondary: "#162228",
+  },
+};
