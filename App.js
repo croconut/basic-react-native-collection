@@ -4,8 +4,8 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import * as Screens from "./screens/Screens";
-import * as Tabs from "./tabs/Tabs";
+import * as Screens from "./src/screens/Screens";
+import * as Tabs from "./src/tabs/Tabs";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
