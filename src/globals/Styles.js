@@ -54,4 +54,10 @@ export default StyleSheet.create({
   smallText: {
     fontSize: FontScalar(18),
   },
+  horizontalRow: {
+    paddingTop: "15%",
+    width: "90%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
 });

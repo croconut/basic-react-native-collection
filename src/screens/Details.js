@@ -11,7 +11,7 @@ const Details = (props) => {
       <Text style={{ ...Styles.largeText, ...{ color: parentStyle.color } }}>
         Details
       </Text>
-      <View style={{ paddingTop: "15%", flexDirection: 'row', }}>
+      <View style={Styles.horizontalRow}>
         <Button
           title="Bottom"
           color={notificationStyle.backgroundColor}
