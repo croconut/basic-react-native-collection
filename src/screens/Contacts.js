@@ -4,8 +4,9 @@ import Styles from '../globals/Styles';
 import Colors from '../globals/Colors';
 
 const Contacts = props => {
+    const refreshedS = Styles();
     return (
-        <View style={Styles.screen}>
+        <View style={refreshedS.screen}>
 
         </View>);
 }

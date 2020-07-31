@@ -12,7 +12,7 @@ export default function() {
     screen: {
       height: "100%",
       marginTop: Constants.statusBarHeight,
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.backgroundSecondary,
       color: theme.colors.textSecondary,
       borderColor: theme.colors.border,
       alignItems: "center",
@@ -24,7 +24,7 @@ export default function() {
     // the unstacked screens are special
     // this function also can't be called with normal () => style
     // using get allows to call it like obj.unstackedScreen instead :)
-    get unstackedScreen() {
+    get stackedScreen() {
       return { ...this.screen, ...{ marginTop: 0 } };
     },
     largeText: {

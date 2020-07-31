@@ -29,12 +29,13 @@ export const Dark = {
   dark: true,
   colors: {
     primary: "#efe7ff",
-    background: "#1a237e",
+    background: "#FFFFFF",
     card: "#7c4dff",
     text: "#FFFFFF",
     border: "#ede7f6",
     notification: "#5c6bc0",
     textSecondary: "#EBEBEB",
+    backgroundSecondary: "#1a237e",
   },
 };
 
@@ -48,5 +49,6 @@ export const Light = {
     border: "#455A64",
     notification: "#FF4DD0",
     textSecondary: "#162228",
+    backgroundSecondary: "#FFFFFF",
   },
 };

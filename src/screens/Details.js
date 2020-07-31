@@ -5,7 +5,7 @@ import Styles from "../globals/Styles";
 const Details = (props) => {
   const { navigation } = props;
   const refreshedS = Styles();
-  const parentStyle = refreshedS.unstackedScreen;
+  const parentStyle = refreshedS.stackedScreen;
   const notificationStyle = refreshedS.notification;
   return (
     <View style={parentStyle}>
