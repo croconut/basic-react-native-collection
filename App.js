@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Dark, Light } from "./src/globals/Colors";
-import { View, StatusBar, Image } from "react-native";
-import Constants from "expo-constants";
+import { Image } from "react-native";
 import Styles from "./src/globals/Styles";
-import { useTheme } from "@react-navigation/native";
-// import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -46,11 +43,11 @@ export default function App() {
             <Image
               {...props}
               style={{ width: FontScalar(15), height: FontScalar(10) }}
-              source={require('./assets/back.png')}
+              source={require("./assets/back.png")}
             />
           ),
           headerStyle: { height: FontScalar(60) },
-          headerTitleStyle: { fontSize: FontScalar(14) },
+          headerTitleStyle: { fontSize: FontScalar(16) },
           headerBackTitleVisible: false,
           headerBackTitleStyle: {},
         }}
