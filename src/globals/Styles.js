@@ -1,23 +1,23 @@
-import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants'
-import FontScalar from '../responsive/FontScalar';
-import Colors from './Colors';
+import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
+import { DarkTheme } from "@react-navigation/native";
+import FontScalar from "../responsive/FontScalar";
+import Colors from "./Colors";
 
 export default StyleSheet.create({
-  screen: {
-    height: "100%",
-    marginTop: Constants.statusBarHeight,
-    backgroundColor: Colors.primary.dark[0],
-    color: Colors.primary.dark[1],
-    alignItems: 'center',
+  container: {
+    flex: 1,
+    backgroundColor: DarkTheme.colors.background,
+    paddingVertical: "2%",
+    paddingHorizontal: "3.5%",
   },
-  largeText: {
-    fontSize: FontScalar(30),
+  titleContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
   },
-  mediumText: {
-    fontSize: FontScalar(22),
-  },
-  smallText: {
-    fontSize: FontScalar(18),
+  title: {
+    fontSize: FontScalar(20),
+    color: DarkTheme.colors.text,
   },
 });
