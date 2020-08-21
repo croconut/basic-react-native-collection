@@ -15,7 +15,7 @@ const ViewNotes = ({ route, navigation }) => {
           icon="plus"
           label="Add a new note"
           onPress={() => {
-            navigation.navigate("Add Notes");
+            navigation.replace("Add Notes");
           }}
         />
       </View>
