@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-import Header from "./components/Header";
-import Styles from "./globals/Styles";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import Stack from "./src/navigation/Stack";
 
 export default function App() {
-  const [outputText, setOutputText] = useState("Open up App.js to start");
   return (
-    <View style={Styles.screen}>
-      <Header title="Guess a number" />
-    </View>
+    <NavigationContainer>
+      <Stack>
+      </Stack>
+    </NavigationContainer>
   );
 }
