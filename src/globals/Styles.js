@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native";
-import Constants from "expo-constants";
 import { DarkTheme } from "@react-navigation/native";
 import FontScalar from "../responsive/FontScalar";
-import Colors from "./Colors";
 
 export default StyleSheet.create({
   container: {
@@ -19,5 +17,12 @@ export default StyleSheet.create({
   title: {
     fontSize: FontScalar(20),
     color: DarkTheme.colors.text,
+  },
+  fab: {
+    margin: "3%",
+    justifyContent: "center",
+    position: "absolute",
+    right: "1%",
+    bottom: "2%",
   },
 });

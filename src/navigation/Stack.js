@@ -7,7 +7,7 @@ const StackNav = createStackNavigator();
 
 const Stack = () => {
   return (
-    <StackNav.Navigator initialRouteName="Home" screenOptions={{}}>
+    <StackNav.Navigator initialRouteName="Home">
       <StackNav.Screen name="Home" component={ViewNotes} />
       <StackNav.Screen name="Add Notes" component={AddNotes} />
     </StackNav.Navigator>
