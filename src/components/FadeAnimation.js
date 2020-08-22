@@ -3,7 +3,8 @@ import { Animated } from "react-native";
 
 const FadeAnimation = (props) => {
   const { visible, fadeTime } = props;
-  const fadeAnim = useRef(new Animated.Value(1)).current; // Initial value for opacity: 0
+  // fade in on first appearance
+  const fadeAnim = useRef(new Animated.Value(visible ? 0 : 1)).current;
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const FadeAnimation = (props) => {
         transform: [{ scale: fadeAnim }],
       }}
     >
-      {isVisible ? props.children : null}
+      {visible || isVisible ? props.children : null}
     </Animated.View>
   );
 };
