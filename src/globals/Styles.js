@@ -18,6 +18,10 @@ export default StyleSheet.create({
     fontSize: FontScalar(20),
     color: DarkTheme.colors.text,
   },
+  basicText: {
+    fontSize: FontScalar(16),
+    color: DarkTheme.colors.text,
+  },
   fab: {
     margin: "3%",
     justifyContent: "center",
@@ -32,5 +36,8 @@ export default StyleSheet.create({
     position: "absolute",
     marginHorizontal: "2%",
     bottom: "5%",
+  },
+  fabCancel: {
+    backgroundColor: "#fc387c",
   },
 });
