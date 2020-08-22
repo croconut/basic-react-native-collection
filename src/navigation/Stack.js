@@ -8,13 +8,13 @@ const StackNav = createStackNavigator();
 const Stack = () => {
   return (
     <StackNav.Navigator
-      initialRouteName="Home"
+      initialRouteName="My Notes"
       screenOptions={{
         headerBackTitleVisible: false,
         headerTitleAlign: "center",
       }}
     >
-      <StackNav.Screen name="Home" component={ViewNotes} />
+      <StackNav.Screen name="My Notes" component={ViewNotes} />
       <StackNav.Screen name="Add Notes" component={AddNotes} />
     </StackNav.Navigator>
   );

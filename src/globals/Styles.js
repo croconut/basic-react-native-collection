@@ -25,4 +25,12 @@ export default StyleSheet.create({
     right: "1%",
     bottom: "2%",
   },
+  fabRow: {
+    flexDirection: "row",
+    width: "96%",
+    justifyContent: "space-between",
+    position: "absolute",
+    marginHorizontal: "2%",
+    bottom: "5%",
+  },
 });
