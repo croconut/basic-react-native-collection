@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { DarkTheme } from "@react-navigation/native";
+import { DarkTheme } from "react-native-paper";
 import FontScalar from "../responsive/FontScalar";
 
 export default StyleSheet.create({

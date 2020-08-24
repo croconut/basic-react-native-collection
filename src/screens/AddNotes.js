@@ -12,8 +12,7 @@ const AddNotes = ({ route, navigation }) => {
   const [hideDescriptionInput, setHideDescriptionInput] = useState(false);
 
   const onSaveNote = () => {
-    navigation.params.addNote({ noteTitle, noteDescription });
-    navigation.replace("My Notes");
+    navigation.navigate("My Notes", { note: {title: noteTitle, body: noteDescription }});
   };
 
   return (
@@ -23,7 +22,7 @@ const AddNotes = ({ route, navigation }) => {
           <View style={{ width: "90%" }}>
             <FadeAnimation visible={!hideTitleInput} fadeTime={200}>
               <TextInput
-                label="Note Title"
+                label="Title"
                 value={noteTitle}
                 onFocus={() => {
                   setHideTitleInput(false);
@@ -34,13 +33,12 @@ const AddNotes = ({ route, navigation }) => {
                   setHideDescriptionInput(false);
                 }}
                 onChangeText={setNoteTitle}
-                mode="flat"
               />
             </FadeAnimation>
             <FadeAnimation visible={!hideDescriptionInput} fadeTime={200}>
               <View style={{ marginTop: "5%" }}>
                 <TextInput
-                  label="Note Description"
+                  label="Body"
                   value={noteDescription}
                   onFocus={() => {
                     setHideTitleInput(true);
@@ -64,7 +62,15 @@ const AddNotes = ({ route, navigation }) => {
 
         <View style={{ flex: 1 }}>
           <View style={Styles.fabRow}>
-            <FAB icon="plus" label="add" small />
+            <FAB
+              icon="plus"
+              label="add"
+              small
+              disabled={
+                noteDescription === "" && noteTitle === "" ? true : false
+              }
+              onPress={onSaveNote}
+            />
             <FAB
               icon="close"
               label="cancel"
@@ -72,7 +78,7 @@ const AddNotes = ({ route, navigation }) => {
               color={Styles.basicText.color}
               style={Styles.fabCancel}
               onPress={() => {
-                navigation.replace("My Notes");
+                navigation.goBack();
               }}
             />
           </View>

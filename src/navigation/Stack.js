@@ -12,6 +12,7 @@ const Stack = () => {
       screenOptions={{
         headerBackTitleVisible: false,
         headerTitleAlign: "center",
+        headerLeft: null,
       }}
     >
       <StackNav.Screen name="My Notes" component={ViewNotes} />
