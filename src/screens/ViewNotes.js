@@ -45,8 +45,6 @@ const ViewNotes = ({ route, navigation }) => {
     // only the ways in which we can affect it
   }, [route.params?.note]);
 
-  console.log(notes);
-
   return (
     <SafeAreaView style={Styles.container}>
       {notes.length === 0 ? (
