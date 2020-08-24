@@ -63,7 +63,7 @@ const AddNotes = ({ route, navigation }) => {
         <View style={{ flex: 1 }}>
           <View style={Styles.fabRow}>
             <FAB
-              icon="plus"
+              icon="note-plus"
               label="add"
               small
               disabled={

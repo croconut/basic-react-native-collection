@@ -22,6 +22,8 @@ const ViewNotes = ({ route, navigation }) => {
       <List.Item
         title={item.title}
         description={item.body}
+        left={props => <List.Icon {...props} icon="unfold-more-horizontal" />}
+        right={props => <List.Icon {...props} icon="trash-can-outline" />}
         descriptionNumberOfLines={1}
         titleStyle={Styles.title}
         descriptionStyle={Styles.basicText}
@@ -61,7 +63,7 @@ const ViewNotes = ({ route, navigation }) => {
       <FAB
         style={Styles.fab}
         small
-        icon="plus"
+        icon="note-plus"
         label="Add a new note"
         onPress={() => {
           navigation.navigate("Add Notes");
