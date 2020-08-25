@@ -87,7 +87,7 @@ const ViewNotes = ({ route, navigation }) => {
   return (
     <SafeAreaView style={Styles.container}>
       {notes.length === 0 ? <NoNotesComponent /> : <HaveNotesComponent />}
-      {<SpinIcon icon="loading" duration={1000} color="grey" size={80} />}
+      {/*<SpinIcon icon="loading" duration={1000} color="grey" size={80} />*/}
       <AddNotesFAB />
     </SafeAreaView>
   );
