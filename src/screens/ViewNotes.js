@@ -17,17 +17,54 @@ const ViewNotes = ({ route, navigation }) => {
     setNotes([...notes, usableNote]);
   };
 
+  const AddNotesFAB = () => {
+    return (
+      <FAB
+        style={Styles.fab}
+        small
+        icon="note-plus"
+        label="Add a new note"
+        onPress={() => {
+          navigation.navigate("Add Notes");
+        }}
+      />
+    );
+  };
+
   const ListComponent = ({ item }) => {
     return (
       <List.Item
         title={item.title}
         description={item.body}
-        left={props => <List.Icon {...props} icon="unfold-more-horizontal" />}
-        right={props => <List.Icon {...props} icon="trash-can-outline" />}
+        left={(props) => <List.Icon {...props} icon="unfold-more-horizontal" />}
+        right={(props) => <List.Icon {...props} icon="trash-can-outline" />}
         descriptionNumberOfLines={1}
         titleStyle={Styles.title}
         descriptionStyle={Styles.basicText}
       />
+    );
+  };
+
+  const HaveNotesComponent = (props) => {
+    return (
+      <FlatList
+        {...props}
+        // style={{ marginBottom: "24%" }}
+        // contentContainerStyle={{flexGrow: 1}}
+        ListFooterComponent={<View style={{marginBottom: "26%"}}/>}
+        data={notes}
+        renderItem={ListComponent}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    );
+  };
+
+  const NoNotesComponent = (props) => {
+    return (
+      <View style={Styles.titleContainer}>
+        <Text style={Styles.title}>You do not have any notes.</Text>
+
+      </View>
     );
   };
 
@@ -49,26 +86,8 @@ const ViewNotes = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={Styles.container}>
-      {notes.length === 0 ? (
-        <View style={Styles.titleContainer}>
-          <Text style={Styles.title}>You do not have any notes.</Text>
-        </View>
-      ) : (
-        <FlatList
-          data={notes}
-          renderItem={ListComponent}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      )}
-      <FAB
-        style={Styles.fab}
-        small
-        icon="note-plus"
-        label="Add a new note"
-        onPress={() => {
-          navigation.navigate("Add Notes");
-        }}
-      />
+      {notes.length === 0 ? <NoNotesComponent /> : <HaveNotesComponent />}
+      <AddNotesFAB />
     </SafeAreaView>
   );
 };
