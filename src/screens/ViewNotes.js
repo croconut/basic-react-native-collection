@@ -4,6 +4,7 @@ import { View, FlatList } from "react-native";
 import { Text, FAB, List } from "react-native-paper";
 import Styles from "../globals/Styles";
 import { SafeAreaView } from "react-native-safe-area-context";
+import SpinIcon from "../components/SpinIcon";
 
 const ViewNotes = ({ route, navigation }) => {
   const [notes, setNotes] = useState([]);
@@ -51,7 +52,7 @@ const ViewNotes = ({ route, navigation }) => {
         {...props}
         // style={{ marginBottom: "24%" }}
         // contentContainerStyle={{flexGrow: 1}}
-        ListFooterComponent={<View style={{marginBottom: "26%"}}/>}
+        ListFooterComponent={<View style={{ marginBottom: "26%" }} />}
         data={notes}
         renderItem={ListComponent}
         keyExtractor={(item) => item.id.toString()}
@@ -63,7 +64,6 @@ const ViewNotes = ({ route, navigation }) => {
     return (
       <View style={Styles.titleContainer}>
         <Text style={Styles.title}>You do not have any notes.</Text>
-
       </View>
     );
   };
@@ -87,6 +87,7 @@ const ViewNotes = ({ route, navigation }) => {
   return (
     <SafeAreaView style={Styles.container}>
       {notes.length === 0 ? <NoNotesComponent /> : <HaveNotesComponent />}
+      {<SpinIcon icon="loading" duration={1000} color="grey" size={80} />}
       <AddNotesFAB />
     </SafeAreaView>
   );
