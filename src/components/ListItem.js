@@ -1,0 +1,43 @@
+import React, { useState } from "react";
+import { TouchableOpacity } from "react-native";
+import { List } from "react-native-paper";
+import Styles from "../globals/Styles";
+import FadeAnimation from "./FadeAnimation";
+
+const MIN_LINES = 1;
+const MAX_LINES = 1000;
+const FADE_TIME = 300;
+
+const ListItem = ({ item, remove }) => {
+  const [lineCount, setLineCount] = useState(1);
+
+  const changeLineNumber = () => {
+    setLineCount(lineCount == MIN_LINES ? MAX_LINES : MIN_LINES);
+  };
+
+  return (
+    <TouchableOpacity onPress={changeLineNumber}>
+      <List.Item
+        title={item.note.title}
+        description={item.note.body}
+        left={(props) => (
+          <FadeAnimation visible={lineCount == MIN_LINES} fadeTime={FADE_TIME}>
+            <List.Icon {...props} icon="unfold-more-horizontal" />
+          </FadeAnimation>
+        )}
+        right={(props) => (
+          <FadeAnimation visible={lineCount == MIN_LINES} fadeTime={FADE_TIME}>
+            <TouchableOpacity onPress={() => remove(item.note.title, item.id)}>
+              <List.Icon {...props} icon="trash-can-outline" />
+            </TouchableOpacity>
+          </FadeAnimation>
+        )}
+        descriptionNumberOfLines={lineCount}
+        titleStyle={Styles.title}
+        descriptionStyle={Styles.basicText}
+      />
+    </TouchableOpacity>
+  );
+};
+
+export default ListItem;

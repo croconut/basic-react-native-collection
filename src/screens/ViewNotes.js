@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { View, FlatList, Alert } from "react-native";
-import { Text, FAB, List } from "react-native-paper";
+import { Text, FAB } from "react-native-paper";
 import Styles from "../globals/Styles";
 import { SafeAreaView } from "react-native-safe-area-context";
 // import SpinIcon from "../components/SpinIcon";
 import { addNote, deleteNote } from "../redux/reducers/NoteReducer";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import ListItem from "../components/ListItem";
 
 const ViewNotes = ({ route, navigation }) => {
   const notes = useSelector((state) => state.notes);
   const dispatch = useDispatch();
   const [lastNote, setLastNote] = useState({});
+  const [lineCount, setLineCount] = useState(1);
 
   const addNotes = (note) => {
     // cant directly change / use the note object here
@@ -57,26 +58,6 @@ const ViewNotes = ({ route, navigation }) => {
     );
   };
 
-  const ListComponent = ({ item }) => {
-    return (
-      <List.Item
-        title={item.note.title}
-        description={item.note.body}
-        left={(props) => <List.Icon {...props} icon="unfold-more-horizontal" />}
-        right={(props) => (
-          <TouchableOpacity
-            onPress={() => removeNotes(item.note.title, item.id)}
-          >
-            <List.Icon {...props} icon="trash-can-outline" />
-          </TouchableOpacity>
-        )}
-        descriptionNumberOfLines={1}
-        titleStyle={Styles.title}
-        descriptionStyle={Styles.basicText}
-      />
-    );
-  };
-
   const HaveNotesComponent = (props) => {
     return (
       <FlatList
@@ -85,7 +66,9 @@ const ViewNotes = ({ route, navigation }) => {
         // contentContainerStyle={{flexGrow: 1}}
         ListFooterComponent={<View style={{ marginBottom: "26%" }} />}
         data={notes}
-        renderItem={ListComponent}
+        renderItem={({item}) => {
+          return <ListItem item={item} remove={removeNotes} />;
+        }}
         keyExtractor={(item) => item.id.toString()}
       />
     );
