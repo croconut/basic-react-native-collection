@@ -1,21 +1,46 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { View, FlatList } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { View, FlatList, Alert } from "react-native";
 import { Text, FAB, List } from "react-native-paper";
 import Styles from "../globals/Styles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import SpinIcon from "../components/SpinIcon";
+// import SpinIcon from "../components/SpinIcon";
+import { addNote, deleteNote } from "../redux/reducers/NoteReducer";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ViewNotes = ({ route, navigation }) => {
-  const [notes, setNotes] = useState([]);
+  const notes = useSelector((state) => state.notes);
+  const dispatch = useDispatch();
   const [lastNote, setLastNote] = useState({});
 
   const addNotes = (note) => {
     // cant directly change / use the note object here
     setLastNote(note);
     var usableNote = _.cloneDeep(note);
-    usableNote.id = notes.length + 1;
-    setNotes([...notes, usableNote]);
+    dispatch(addNote(usableNote));
+    //setNotes([...notes, usableNote]);
+  };
+
+  const checkDeleteAlert = (title, id) => {
+    Alert.alert(
+      "Delete this note: " + title + "?",
+      "This action is permanent",
+      [
+        {
+          text: "Confirm",
+          onPress: () => dispatch(deleteNote(id)),
+        },
+        {
+          text: "Cancel",
+        },
+      ]
+    );
+  };
+
+  const removeNotes = (title, id) => {
+    checkDeleteAlert(title, id);
+    // dispatch(deleteNote(id));
   };
 
   const AddNotesFAB = () => {
@@ -35,10 +60,16 @@ const ViewNotes = ({ route, navigation }) => {
   const ListComponent = ({ item }) => {
     return (
       <List.Item
-        title={item.title}
-        description={item.body}
+        title={item.note.title}
+        description={item.note.body}
         left={(props) => <List.Icon {...props} icon="unfold-more-horizontal" />}
-        right={(props) => <List.Icon {...props} icon="trash-can-outline" />}
+        right={(props) => (
+          <TouchableOpacity
+            onPress={() => removeNotes(item.note.title, item.id)}
+          >
+            <List.Icon {...props} icon="trash-can-outline" />
+          </TouchableOpacity>
+        )}
         descriptionNumberOfLines={1}
         titleStyle={Styles.title}
         descriptionStyle={Styles.basicText}
