@@ -9,10 +9,15 @@ const MAX_LINES = 1000;
 const FADE_TIME = 300;
 
 const ListItem = ({ item, remove }) => {
-  const [lineCount, setLineCount] = useState(1);
+  const [lineCount, setLineCount] = useState(MIN_LINES);
+  const [delayedLineCount, setDelayedLineCount] = useState(MIN_LINES);
 
   const changeLineNumber = () => {
-    setLineCount(lineCount == MIN_LINES ? MAX_LINES : MIN_LINES);
+    setLineCount(lineCount === MIN_LINES ? MAX_LINES : MIN_LINES);
+  };
+
+  const startDelayedChange = () => {
+    setDelayedLineCount(lineCount);
   };
 
   return (
@@ -21,18 +26,22 @@ const ListItem = ({ item, remove }) => {
         title={item.note.title}
         description={item.note.body}
         left={(props) => (
-          <FadeAnimation visible={lineCount == MIN_LINES} fadeTime={FADE_TIME}>
+          <FadeAnimation
+            visible={lineCount === MIN_LINES}
+            fadeTime={FADE_TIME}
+            callback={startDelayedChange}
+          >
             <List.Icon {...props} icon="unfold-more-horizontal" />
           </FadeAnimation>
         )}
         right={(props) => (
-          <FadeAnimation visible={lineCount == MIN_LINES} fadeTime={FADE_TIME}>
+          <FadeAnimation visible={lineCount === MIN_LINES} fadeTime={FADE_TIME}>
             <TouchableOpacity onPress={() => remove(item.note.title, item.id)}>
               <List.Icon {...props} icon="trash-can-outline" />
             </TouchableOpacity>
           </FadeAnimation>
         )}
-        descriptionNumberOfLines={lineCount}
+        descriptionNumberOfLines={delayedLineCount}
         titleStyle={Styles.title}
         descriptionStyle={Styles.basicText}
       />

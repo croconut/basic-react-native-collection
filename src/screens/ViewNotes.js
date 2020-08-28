@@ -13,7 +13,6 @@ const ViewNotes = ({ route, navigation }) => {
   const notes = useSelector((state) => state.notes);
   const dispatch = useDispatch();
   const [lastNote, setLastNote] = useState({});
-  const [lineCount, setLineCount] = useState(1);
 
   const addNotes = (note) => {
     // cant directly change / use the note object here
@@ -62,8 +61,6 @@ const ViewNotes = ({ route, navigation }) => {
     return (
       <FlatList
         {...props}
-        // style={{ marginBottom: "24%" }}
-        // contentContainerStyle={{flexGrow: 1}}
         ListFooterComponent={<View style={{ marginBottom: "26%" }} />}
         data={notes}
         renderItem={({item}) => {

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Animated } from "react-native";
 
 const FadeAnimation = (props) => {
-  const { visible, fadeTime } = props;
+  const { visible, fadeTime, callback } = props;
   // fade in on first appearance
   const fadeAnim = useRef(new Animated.Value(visible ? 0 : 1)).current;
   const [isVisible, setIsVisible] = useState(true);
@@ -14,6 +14,7 @@ const FadeAnimation = (props) => {
       useNativeDriver: false,
     }).start(() => {
       setIsVisible(visible);
+      callback?.();
     });
   }, [fadeAnim, visible, fadeTime]);
 
