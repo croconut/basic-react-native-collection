@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
 const SpinIcon = (props) => {
-  const { duration, icon } = props;
+  const { duration = 1000, icon = "loading", size = 120 } = props;
   const spin = new Animated.Value(0);
 
   const manualLoop = () => {
@@ -36,6 +36,7 @@ const SpinIcon = (props) => {
       <AnimatedIcon
         style={{ transform: [{ rotate: spinDeg }] }}
         name={icon}
+        size={size}
         {...props}
       />
     </View>
