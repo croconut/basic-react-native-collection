@@ -12,7 +12,10 @@ const AddNotes = ({ route, navigation }) => {
   const [hideDescriptionInput, setHideDescriptionInput] = useState(false);
 
   const onSaveNote = () => {
-    navigation.navigate("My Notes", { note: {title: noteTitle, body: noteDescription }});
+    navigation.navigate("My Notes", {
+      note: { title: noteTitle, body: noteDescription },
+      id: "none",
+    });
   };
 
   return (

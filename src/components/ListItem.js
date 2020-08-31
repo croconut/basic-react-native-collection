@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { List } from "react-native-paper";
 import Styles from "../globals/Styles";
 import FadeAnimation from "./FadeAnimation";
@@ -8,7 +8,7 @@ const MIN_LINES = 1;
 const MAX_LINES = 1000;
 const FADE_TIME = 300;
 
-const ListItem = ({ item, remove }) => {
+const ListItem = ({ item, remove, edit }) => {
   const [lineCount, setLineCount] = useState(MIN_LINES);
   const [delayedLineCount, setDelayedLineCount] = useState(MIN_LINES);
 
@@ -35,11 +35,26 @@ const ListItem = ({ item, remove }) => {
           </FadeAnimation>
         )}
         right={(props) => (
-          <FadeAnimation visible={lineCount === MIN_LINES} fadeTime={FADE_TIME}>
-            <TouchableOpacity onPress={() => remove(item.note.title, item.id)}>
-              <List.Icon {...props} icon="trash-can-outline" />
-            </TouchableOpacity>
-          </FadeAnimation>
+          <View style={{ flexDirection: "row", }}>
+            <FadeAnimation
+              visible={lineCount === MIN_LINES}
+              fadeTime={FADE_TIME}
+            >
+              <TouchableOpacity
+                onPress={() => remove(item.note.title, item.id)}
+              >
+                <List.Icon {...props} icon="trash-can-outline" />
+              </TouchableOpacity>
+            </FadeAnimation>
+            <FadeAnimation
+              visible={lineCount !== MIN_LINES}
+              fadeTime={FADE_TIME}
+            >
+              <TouchableOpacity onPress={() => edit(item.note, item.id)}>
+                <List.Icon {...props} icon="square-edit-outline" />
+              </TouchableOpacity>
+            </FadeAnimation>
+          </View>
         )}
         descriptionNumberOfLines={delayedLineCount}
         titleStyle={Styles.title}

@@ -6,7 +6,7 @@ import { Text, FAB } from "react-native-paper";
 import Styles from "../globals/Styles";
 import { SafeAreaView } from "react-native-safe-area-context";
 // import SpinIcon from "../components/SpinIcon";
-import { addNote, deleteNote } from "../redux/reducers/NoteReducer";
+import { addNote, deleteNote, editNote } from "../redux/reducers/NoteReducer";
 import ListItem from "../components/ListItem";
 
 const ViewNotes = ({ route, navigation }) => {
@@ -19,7 +19,16 @@ const ViewNotes = ({ route, navigation }) => {
     setLastNote(note);
     var usableNote = _.cloneDeep(note);
     dispatch(addNote(usableNote));
-    //setNotes([...notes, usableNote]);
+  };
+
+  const editRedirect = (note, id) => {
+    navigation.navigate("Edit Note", { note, id });
+  };
+
+  const editNotes = (note, id) => {
+    setLastNote(note);
+    var usableNote = _.cloneDeep(note);
+    dispatch(editNote(usableNote, id));
   };
 
   const checkDeleteAlert = (title, id) => {
@@ -51,7 +60,7 @@ const ViewNotes = ({ route, navigation }) => {
         icon="note-plus"
         label="Add a new note"
         onPress={() => {
-          navigation.navigate("Add Notes");
+          navigation.navigate("Add Note");
         }}
       />
     );
@@ -63,8 +72,10 @@ const ViewNotes = ({ route, navigation }) => {
         {...props}
         ListFooterComponent={<View style={{ marginBottom: "26%" }} />}
         data={notes}
-        renderItem={({item}) => {
-          return <ListItem item={item} remove={removeNotes} />;
+        renderItem={({ item }) => {
+          return (
+            <ListItem item={item} remove={removeNotes} edit={editRedirect} />
+          );
         }}
         keyExtractor={(item) => item.id.toString()}
       />
@@ -80,20 +91,23 @@ const ViewNotes = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    if (route.params?.note) {
-      // only really care about preventing use of the same note twice
-      // in a row (generally that would be a mistake)
-      // i could enforce unique title buuuuut meh
-      if (
-        lastNote.body !== route.params.note.body ||
-        lastNote.title !== route.params.note.title
-      ) {
-        addNotes(route.params.note);
-      }
+    if (!route.params?.note) {
+      return;
+    }
+    if (
+      lastNote.body === route.params.note.body &&
+      lastNote.title === route.params.note.title
+    ) {
+      return;
+    }
+    if (route.params?.id !== "none") {
+      editNotes(route.params.note, route.params.id);
+    } else {
+      addNotes(route.params.note);
     }
     // very important, not using the notes state as an effect dependency
     // only the ways in which we can affect it
-  }, [route.params?.note]);
+  }, [route.params?.note, route.params?.id]);
 
   return (
     <SafeAreaView style={Styles.container}>
