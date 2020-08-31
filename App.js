@@ -22,7 +22,7 @@ export default function App() {
         <PersistGate
           persistor={persistor}
           // using defaults
-          loading={SpinIcon}
+          loading={<SpinIcon />}
         >
           <PaperProvider theme={PaperTheme}>
             <StatusBar
